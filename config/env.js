@@ -22,8 +22,9 @@ var dotenvFiles = [
   // since normally you expect tests to produce the same
   // results for everyone
   NODE_ENV !== 'test' && `${paths.dotenv}.local`,
-  paths.dotenv,
+  paths.dotenv
 ].filter(Boolean);
+console.log(dotenvFiles);
 
 // Load environment variables from .env* files. Suppress warnings using silent
 // if this file is missing. dotenv will never modify any environment variables
@@ -32,11 +33,11 @@ var dotenvFiles = [
 dotenvFiles.forEach(dotenvFile => {
   if (fs.existsSync(dotenvFile)) {
     require('dotenv').config({
-      path: dotenvFile,
+      path: dotenvFile
     });
   }
 });
-
+console.log(process.env.FIREBASE_API_KEY);
 // We support resolving modules according to `NODE_PATH`.
 // This lets you use absolute paths in imports inside large monorepos:
 // https://github.com/facebookincubator/create-react-app/issues/253.
@@ -66,6 +67,7 @@ function getClientEnvironment(publicUrl) {
         return env;
       },
       {
+        FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
         // Useful for determining whether we’re running in production mode.
         // Most importantly, it switches React into the correct mode.
         NODE_ENV: process.env.NODE_ENV || 'development',
@@ -73,7 +75,7 @@ function getClientEnvironment(publicUrl) {
         // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
         // This should only be used as an escape hatch. Normally you would put
         // images into the `src` and `import` them in code to get their paths.
-        PUBLIC_URL: publicUrl,
+        PUBLIC_URL: publicUrl
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin
@@ -81,7 +83,7 @@ function getClientEnvironment(publicUrl) {
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key]);
       return env;
-    }, {}),
+    }, {})
   };
 
   return { raw, stringified };
