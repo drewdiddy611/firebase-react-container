@@ -1,9 +1,8 @@
-@import
-'./shared',
-'minx/src/reset',
-'minx/src/elements',
-'./grid';
-
+.placeholder-component {
+  margin-top: 15%;
+  text-align: center;
+  width: 100%;
+}
 
 html {
   overflow-y: scroll;
@@ -23,5 +22,5 @@ a {
 }
 
 ::selection {
-  background: rgba(200,200,255,.1);
+  background: rgba(200, 200, 255, 0.1);
 }
